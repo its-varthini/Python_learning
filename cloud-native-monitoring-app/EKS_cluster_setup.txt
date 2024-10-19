@@ -1,0 +1,50 @@
+1)to find which machine type we are using
+
+cat /etc/os-release
+
+NAME="Amazon Linux"
+VERSION="2023"
+ID="amzn"
+ID_LIKE="fedora"
+VERSION_ID="2023"
+PLATFORM_ID="platform:al2023"
+PRETTY_NAME="Amazon Linux 2023.5.20240916"
+ANSI_COLOR="0;33"
+CPE_NAME="cpe:2.3:o:amazon:amazon_linux:2023"
+HOME_URL="https://aws.amazon.com/linux/amazon-linux-2023/"
+DOCUMENTATION_URL="https://docs.aws.amazon.com/linux/"
+SUPPORT_URL="https://aws.amazon.com/premiumsupport/"
+BUG_REPORT_URL="https://github.com/amazonlinux/amazon-linux-2023"
+VENDOR_NAME="AWS"
+VENDOR_URL="https://aws.amazon.com/"
+SUPPORT_END="2028-03-15"
+
+2)install eksctl
+
+curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+
+sudo mv /tmp/eksctl /usr/local/bin
+
+eksctl version
+
+3)aws configure
+
+4)eksctl create cluster --name demo-ekscluster --region us-east-1 --nodegroup-name linux-nodes --node-type t2.micro --nodes 2 --managed
+
+5)for connecting to the ekscluster via cli use below command
+
+aws eks update-kubeconfig --region us-east-1 --name demo-ekscluster
+
+kubectl port-forward service/<service_name> 5000:5000
+
+6)follow link to install kubectl and awscli:
+https://sarvar04.medium.com/configure-eksctl-kubectl-aws-cli-on-amazon-linux-2-6efc3e166dbc
+
+
+
+
+
+
+
+
+
