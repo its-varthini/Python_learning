@@ -1,0 +1,21 @@
+Dockerizing our python web app and deploying it into minikube
+
+1) created docker image using Dockerfile 
+refer in docker hub for image name : varthinidochub/pythonapp:1.0
+
+2) create pod 
+   kubectl run mypyapp --image=varthinidochub/pythonapp:1.0
+   create service
+   kubectl expose pod mypyapp --type=NodePort --port=3000 --name=mypyapp-service
+
+ 3) Check service is working or not
+    minikube service mypyapp-service --url
+    curl url
+
+  4)Now We want to access our application from outside.
+  kubectl port-forward svc/mypyapp-service 3000:3000 --address 0.0.0.0 &
+
+  5) Now just paste your instance publicIP:3000 in your browser and view your application page.
+  
+  reference : https://blog.kubekode.org/deploy-react-app-to-kubernetes-on-aws-ec2
+              https://blog.kubekode.org/setup-minikube-on-aws-ec2-instance
