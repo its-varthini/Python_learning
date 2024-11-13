@@ -19,3 +19,20 @@ refer in docker hub for image name : varthinidochub/pythonapp:1.0
   
   reference : https://blog.kubekode.org/deploy-react-app-to-kubernetes-on-aws-ec2
               https://blog.kubekode.org/setup-minikube-on-aws-ec2-instance
+
+ 6)Install ArgoCD and Deploy the Application
+   kubectl create namespace argocd
+   kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
+   kubectl get all -n argocd
+
+  7)access the Argocd UI using ipaddress:8080 
+     kubectl port-forward svc/argocd-server -n argocd --address 0.0.0.0 8080:443
+  
+  8)Get the initial password for the admin user to log in
+      kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+
+   Reference : https://www.fosstechnix.com/how-to-install-argocd-on-minikube/
+   keeping the sync as automatic if any changes to the Service or deployment yaml then it will automatically reflected in the minikube cluster.
+
+   
